@@ -243,7 +243,7 @@ describe('validateUserInput', () => {
     })
   })
 
-  describe.only('stack', () => {
+  describe('stack', () => {
     let stack;
 
     beforeEach(() => {
