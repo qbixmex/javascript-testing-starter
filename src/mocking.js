@@ -12,10 +12,28 @@ export function getPriceInCurrency(price, currency) {
 }
 
 // Exercise
+/**
+ * Get shipping information.
+ * 
+ * @param {string} destination 
+ * 
+ * @example ```javascript
+ * getShippingInfo('New York');
+ * // Shipping Cost: $10 (3 Days)
+ * ```
+ * 
+ * @returns {string} Shipping information.
+ */
 export function getShippingInfo(destination) {
   const quote = getShippingQuote(destination);
   if (!quote) return 'Shipping Unavailable';
-  return `Shipping Cost: $${quote.cost} (${quote.estimatedDays} Days)`;
+  return "Shipping Cost:"
+    + ` $${quote.cost}`
+    + ' ('
+    + quote.estimatedDays
+    + ' day'
+    + `${(quote.estimatedDays > 1) ? 's' : ''}`
+    + ').';
 }
 
 // Lesson: Interaction testing
