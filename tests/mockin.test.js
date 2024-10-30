@@ -52,4 +52,15 @@ describe('mocking', () => {
     expect(greet).toHaveBeenCalledWith(testName);
   });
 
+  it('should return ok with mock function', () => {
+    const sendText = vi.fn();
+
+    sendText.mockReturnValue('ok');
+
+    const result = sendText('lorem');
+
+    expect(result).toBe('ok');
+    expect(sendText).toHaveBeenCalledWith('lorem');
+  });
+
 });
