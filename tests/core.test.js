@@ -218,29 +218,17 @@ describe('validateUserInput', () => {
       expect(canDrive(18, 'CA')).toMatch(/invalid/i);
     });
 
-    it('should returns false if the age is not valid in USA', () => {
-      expect(canDrive(15, 'US')).toBe(false);
-    });
-
-    it('should returns false if the age is not valid in Mexico', () => {
-      expect(canDrive(12, 'MX')).toBe(false);
-    });
-
-    it('should returns false if the age is not valid in UK', () => {
-      expect(canDrive(13, 'UK')).toBe(false);
-    });
-
-    it('should returns true if the age is valid in USA', () => {
-      expect(canDrive(16, 'US')).toBe(true);
-    });
-
-    it('should returns true if the age is valid in MX', () => {
-      expect(canDrive(18, 'MX')).toBe(true);
-    });
-
-    it('should returns true if the age is valid in UK', () => {
-      expect(canDrive(18, 'UK')).toBe(true);
-    });
+    it.each([
+      { age: 15, country: 'US', result: false },
+      { age: 12, country: 'MX', result: false },
+      { age: 16, country: 'UK', result: false },
+      { age: 16, country: 'US', result: true },
+      { age: 18, country: 'MX', result: true },
+      { age: 18, country: 'UK', result: true },
+    ])(
+      'should returns $result if the age is not valid in $country',
+      ({ age, country, result }) => expect(canDrive(age, country)).toBe(result)
+    );
   });
 
 });
