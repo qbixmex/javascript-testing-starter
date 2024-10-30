@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { message, numbersArray, person, getCoupons } from '../src/core';
+import { message, numbersArray, person, getCoupons, calculateDiscount } from '../src/core';
 
 describe('Match Object', () => {
   it('should equals value', () => {
@@ -62,7 +62,7 @@ describe('Match objects', () => {
   });
 });
 
-describe.only('getCoupons', () => {
+describe('getCoupons', () => {
   it('should returns an array', () => {
     const coupons = getCoupons();
     expect(Array.isArray(coupons)).toBe(true);
@@ -92,3 +92,27 @@ describe.only('getCoupons', () => {
     });
   });
 });
+
+describe('calculateDiscount', () => {
+  it('should return discounted price if given valid code', () => {
+    expect(calculateDiscount(10, "SAVE10")).toBe(9);
+    expect(calculateDiscount(10, "SAVE20")).toBe(8);
+  });
+
+  it('should handle non-numeric price', () => {
+    expect(calculateDiscount("10", "SAVE10")).toMatch(/invalid/i);
+  });
+
+  it('should handle negative price', () => {
+    expect(calculateDiscount(-10, "SAVE10")).toMatch(/invalid/i);
+  });
+
+  it('should handle non-string discount code', () => {
+    expect(calculateDiscount(10, 20)).toMatch(/invalid/i);
+  });
+
+  it('should handle invalid discount code', () => {
+    const price = 10;
+    expect(calculateDiscount(price, "SAVE50")).toBe(price);
+  });
+})

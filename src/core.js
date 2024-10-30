@@ -58,6 +58,18 @@ export function getCoupons() {
 }
 
 // Lesson: Positive and negative testing
+
+/**
+ * Calculate the discount price based on the price and discount.
+ * 
+ * @example ```javascript
+ * calculateDiscount(100, 'SAVE10');
+ * calculateDiscount(200, 'SAVE20');
+ * ```
+ * @param {number} price 
+ * @param {string} discountCode 
+ * @returns The discounted price.
+ */
 export function calculateDiscount(price, discountCode) {
   if (typeof price !== 'number' || price <= 0) {
     return 'Invalid price';
@@ -68,6 +80,7 @@ export function calculateDiscount(price, discountCode) {
   }
 
   let discount = 0;
+
   if (discountCode === 'SAVE10') {
     discount = 0.1;
   } else if (discountCode === 'SAVE20') {
