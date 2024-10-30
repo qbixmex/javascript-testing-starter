@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
 import {
   message,
   numbersArray,
@@ -240,6 +240,15 @@ describe('validateUserInput', () => {
         expect(error.reason).toMatch(/fail/i);
       }
     })
+  })
+
+  describe('test suite', () => {
+    beforeAll(() => console.log("before All Called"));
+    beforeEach(() => console.log("Before Each Called"));
+    afterEach(() => console.log("After Each Called"));
+    afterAll(() => console.log("After All Called"));
+    it('test 1', () => {});
+    it('test 2', () => {});
   })
 
 });
