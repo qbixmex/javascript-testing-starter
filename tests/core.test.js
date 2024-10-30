@@ -6,6 +6,7 @@ import {
   getCoupons,
   calculateDiscount,
   validateUserInput,
+  isPriceInRange,
 } from '../src/core';
 
 describe('Match Object', () => {
@@ -124,7 +125,7 @@ describe('calculateDiscount', () => {
   });
 });
 
-describe.only('validateUserInput', () => {
+describe('validateUserInput', () => {
   it('should returns success if given valid input', () => {
     const result = validateUserInput("captain", 28);
     expect(typeof result).toBe("string");
@@ -160,4 +161,21 @@ describe.only('validateUserInput', () => {
     expect(result).toMatch(/invalid username/i);
     expect(result).toMatch(/invalid age/i);
   });
-})
+
+  describe.only('isPriceInRange', () => {
+    it('should returns false if the price is outside the range', () => {
+      expect(isPriceInRange(-10, 0, 100)).toBe(false);
+      expect(isPriceInRange(200, 50, 150)).toBe(false);
+    });
+
+    it('should returns true if the price is equals to the min or the the max', () => {
+      expect(isPriceInRange(0, 0, 100)).toBe(true);
+      expect(isPriceInRange(200, 0, 200)).toBe(true);
+    });
+
+    it('should returns true if the price is within the range', () => {
+      expect(isPriceInRange(15, 10, 20)).toBe(true);
+    });
+  });
+
+});

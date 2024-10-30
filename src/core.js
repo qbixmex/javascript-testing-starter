@@ -117,6 +117,18 @@ export function validateUserInput(username, age) {
 }
 
 // Lesson: Boundary testing
+/**
+ * Check if the price is within the given range.
+ * 
+ * @param {number} price
+ * @param {number} min
+ * @param {number} max
+ * @example ```javascript
+ *  isPriceInRange(100, 50, 150); // true
+ *  isPriceInRange(200, 50, 150); // false
+ * ```
+ * @returns {boolean} True if the price is within the range otherwise false.
+ */
 export function isPriceInRange(price, min, max) {
   return price >= min && price <= max;
 }
