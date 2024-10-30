@@ -1,5 +1,5 @@
 import { describe, test, it, expect } from "vitest";
-import { max } from "../src/intro";
+import { max, fizzBuzz } from "../src/intro";
 
 // (AAA) Pattern
 
@@ -31,5 +31,20 @@ describe("Max", () => {
 
   it("should return the first argument if it is greater", () => {
     expect(max(1, 1)).toBe(1);
+  });
+});
+
+describe("FizzBuzz", () => {
+  it("should return FizzBuzz if argument is divisible by 3 or 5", () => {
+    expect(fizzBuzz(15)).toBe("FizzBuzz");
+  });
+  it("should return Fizz if argument is only divisible by 3", () => {
+    expect(fizzBuzz(9)).toBe("Fizz");
+  });
+  it("should return Buzz if argument is only divisible by 5", () => {
+    expect(fizzBuzz(25)).toBe("Buzz");
+  });
+  it("should return the argument as string if it's not divisible by 3 or 5", () => {
+    expect(fizzBuzz(8)).toBe("8");
   });
 });
