@@ -37,6 +37,11 @@ export function getShippingInfo(destination) {
 }
 
 // Lesson: Interaction testing
+/**
+ * Render the home page.
+ *  
+ * @returns {Promise<string>} Rendered page content.
+ */
 export async function renderPage() {
   trackPageView('/home');
 
