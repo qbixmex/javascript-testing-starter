@@ -1,5 +1,5 @@
-import { describe, test, it, expect } from "vitest";
-import { max, fizzBuzz } from "../src/intro";
+import { describe, it, expect } from "vitest";
+import { max, fizzBuzz, calculateAverage } from "../src/intro";
 
 // (AAA) Pattern
 
@@ -46,5 +46,20 @@ describe("FizzBuzz", () => {
   });
   it("should return the argument as string if it's not divisible by 3 or 5", () => {
     expect(fizzBuzz(8)).toBe("8");
+  });
+});
+
+describe('calculateAverage', () => {
+  it('should return NaN if given an empty array', () => {
+    expect(calculateAverage([])).toBe(NaN);
+  });
+  it('should calculate the average of an array with a single element', () => {
+    expect(calculateAverage([1])).toBe(1);
+  });
+  it('should calculate the average of an array with a two elements', () => {
+    expect(calculateAverage([1,2])).toBe(1.5);
+  });
+  it('should calculate the average of an array with a three elements', () => {
+    expect(calculateAverage([1,2,3])).toBe(2);
   });
 });
