@@ -164,20 +164,17 @@ describe('validateUserInput', () => {
     expect(result).toMatch(/invalid age/i);
   });
 
-  describe('isPriceInRange', () => {
-    it('should returns false if the price is outside the range', () => {
-      expect(isPriceInRange(-10, 0, 100)).toBe(false);
-      expect(isPriceInRange(200, 50, 150)).toBe(false);
-    });
-
-    it('should returns true if the price is equals to the min or the the max', () => {
-      expect(isPriceInRange(0, 0, 100)).toBe(true);
-      expect(isPriceInRange(200, 0, 200)).toBe(true);
-    });
-
-    it('should returns true if the price is within the range', () => {
-      expect(isPriceInRange(15, 10, 20)).toBe(true);
-    });
+  describe.only('isPriceInRange', () => {
+    it.each([
+      { scenario: 'price less than min', price: -10, result: false },
+      { scenario: 'price equals to min', price: 0, result: true },
+      { scenario: 'price between min and max', price: 50, result: true },
+      { scenario: 'price equals max', price: 100, result: true },
+      { scenario: 'price greater than max', price: 110, result: false },
+    ])(
+      'should returns $result when $scenario',
+      ({ price, result }) => expect(isPriceInRange(price, 0, 100)).toBe(result)
+    );
   });
 
   describe('isValidUsername', () => {
@@ -213,7 +210,7 @@ describe('validateUserInput', () => {
     });
   });
 
-  describe.only('canDrive', () => {
+  describe('canDrive', () => {
     it('should returns false if the age is not valid', () => {
       expect(canDrive(18, 'CA')).toMatch(/invalid/i);
     });
