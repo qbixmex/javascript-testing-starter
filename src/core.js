@@ -134,7 +134,18 @@ export function isPriceInRange(price, min, max) {
 }
 
 // Exercise: Boundary testing
+/**
+ * Check if the username is valid.
+ * @example ```javascript
+ *  isValidUsername('john_doe'); // true
+ *  isValidUsername('john'); // false
+ * ```
+ * @param {string} username
+ * @returns {boolean} True if the username is valid otherwise false.
+ */
 export function isValidUsername(username) {
+  if (!username) return false; 
+
   const minLength = 5;
   const maxLength = 15;
 

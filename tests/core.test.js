@@ -7,6 +7,7 @@ import {
   calculateDiscount,
   validateUserInput,
   isPriceInRange,
+  isValidUsername,
 } from '../src/core';
 
 describe('Match Object', () => {
@@ -162,7 +163,7 @@ describe('validateUserInput', () => {
     expect(result).toMatch(/invalid age/i);
   });
 
-  describe.only('isPriceInRange', () => {
+  describe('isPriceInRange', () => {
     it('should returns false if the price is outside the range', () => {
       expect(isPriceInRange(-10, 0, 100)).toBe(false);
       expect(isPriceInRange(200, 50, 150)).toBe(false);
@@ -175,6 +176,39 @@ describe('validateUserInput', () => {
 
     it('should returns true if the price is within the range', () => {
       expect(isPriceInRange(15, 10, 20)).toBe(true);
+    });
+  });
+
+  describe.only('isValidUsername', () => {
+    const minLength = 5;
+    const maxLength = 15;
+
+    it('should returns false if username is exactly the minimum length', () => {
+      expect(isValidUsername("x".repeat(minLength))).toBe(true);
+    });
+
+    it('should returns false if username is exactly the maximum length', () => {
+      expect(isValidUsername("x".repeat(maxLength))).toBe(true);
+    });
+
+    it('should returns false if username is too short', () => {
+      expect(isValidUsername("x".repeat(minLength - 1))).toBe(false);
+    });
+
+    it('should returns false if username is too long', () => {
+      expect(isValidUsername("x".repeat(maxLength + 1))).toBe(false);
+    });
+
+    it('should returns true if username is within the length constraint', () => {
+      expect(isValidUsername("x".repeat(maxLength - 1))).toBe(true);
+      expect(isValidUsername("x".repeat(minLength + 1))).toBe(true);
+    });
+
+    it('should returns false for invalid types', () => {
+      expect(isValidUsername(undefined)).toBe(false);
+      expect(isValidUsername("")).toBe(false);
+      expect(isValidUsername(null)).toBe(false);
+      expect(isValidUsername(44)).toBe(false);
     });
   });
 
