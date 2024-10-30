@@ -1,3 +1,46 @@
+import crypto from 'node:crypto';
+
+/**
+ * Returns a message when a file is not found.
+ * @returns {string} Message when a file is not found. 
+ * 
+*/
+export function message() {
+  return "the requested file was not found";
+};
+
+/**
+ * Returns an array of numbers.
+ * @returns {number[]} Array of numbers.
+ */
+export function numbersArray() {
+  return [ 3, 2, 4, 67, 7, 32 ];
+};
+
+/**
+ * Create a person object with a UUID.
+ * @param {string} firstName
+ * @param {string} lastName
+ * 
+ * @example ```javascript
+ * person('John', 'Doe');
+ * person('Alice', 'Brown');
+ * ```
+ * 
+ * @returns {{
+ *  id: string;
+ *  firstName: string;
+ *  lastName: string
+ * }} Person Object with UUID.
+ */
+export function person(firstName, lastName) {
+  return {
+    id: crypto.randomUUID(),
+    firstName,
+    lastName
+  };
+};
+
 // Exercise: Writing good assertions
 export function getCoupons() {
   return [
