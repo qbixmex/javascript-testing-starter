@@ -9,6 +9,7 @@ import {
   isPriceInRange,
   isValidUsername,
   canDrive,
+  fetchData,
 } from '../src/core';
 
 describe('Match Object', () => {
@@ -164,7 +165,7 @@ describe('validateUserInput', () => {
     expect(result).toMatch(/invalid age/i);
   });
 
-  describe.only('isPriceInRange', () => {
+  describe('isPriceInRange', () => {
     it.each([
       { scenario: 'price less than min', price: -10, result: false },
       { scenario: 'price equals to min', price: 0, result: true },
@@ -227,5 +228,18 @@ describe('validateUserInput', () => {
       ({ age, country, result }) => expect(canDrive(age, country)).toBe(result)
     );
   });
+
+  describe('fetchData', () => {
+    it('should return a promise that will resolve to an array of numbers', async () => {
+      try {
+        const result = await fetchData();
+        expect(Array.isArray(result)).toBe(true);
+        expect(result.length).toBeGreaterThan(0);
+      } catch (error) {
+        expect(error).toHaveProperty("reason");
+        expect(error.reason).toMatch(/fail/i);
+      }
+    })
+  })
 
 });
