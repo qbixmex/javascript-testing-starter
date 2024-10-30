@@ -153,10 +153,25 @@ export function isValidUsername(username) {
 }
 
 // Exercise: Boundary testing
+/**
+ * Check if the age is valid.
+ * @param {number} age
+ * @param {string} countryCode
+ * 
+ * @example ```javascript
+ * canDrive(16, 'US'); // true
+ * canDrive(16, 'UK'); // false
+ * canDrive(18, 'MX'); // true
+ * canDrive(18, 'CA'); // 'Invalid country code'
+ * ```
+ * 
+ * @returns {boolean | string} True if the age is valid otherwise error message.
+ */
 export function canDrive(age, countryCode) {
   const legalDrivingAge = {
     US: 16,
     UK: 17,
+    MX: 18,
   };
 
   if (!legalDrivingAge[countryCode]) {

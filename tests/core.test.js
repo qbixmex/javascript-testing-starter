@@ -8,6 +8,7 @@ import {
   validateUserInput,
   isPriceInRange,
   isValidUsername,
+  canDrive,
 } from '../src/core';
 
 describe('Match Object', () => {
@@ -179,7 +180,7 @@ describe('validateUserInput', () => {
     });
   });
 
-  describe.only('isValidUsername', () => {
+  describe('isValidUsername', () => {
     const minLength = 5;
     const maxLength = 15;
 
@@ -209,6 +210,36 @@ describe('validateUserInput', () => {
       expect(isValidUsername("")).toBe(false);
       expect(isValidUsername(null)).toBe(false);
       expect(isValidUsername(44)).toBe(false);
+    });
+  });
+
+  describe.only('canDrive', () => {
+    it('should returns false if the age is not valid', () => {
+      expect(canDrive(18, 'CA')).toMatch(/invalid/i);
+    });
+
+    it('should returns false if the age is not valid in USA', () => {
+      expect(canDrive(15, 'US')).toBe(false);
+    });
+
+    it('should returns false if the age is not valid in Mexico', () => {
+      expect(canDrive(12, 'MX')).toBe(false);
+    });
+
+    it('should returns false if the age is not valid in UK', () => {
+      expect(canDrive(13, 'UK')).toBe(false);
+    });
+
+    it('should returns true if the age is valid in USA', () => {
+      expect(canDrive(16, 'US')).toBe(true);
+    });
+
+    it('should returns true if the age is valid in MX', () => {
+      expect(canDrive(18, 'MX')).toBe(true);
+    });
+
+    it('should returns true if the age is valid in UK', () => {
+      expect(canDrive(18, 'UK')).toBe(true);
     });
   });
 
