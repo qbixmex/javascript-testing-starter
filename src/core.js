@@ -42,6 +42,14 @@ export function person(firstName, lastName) {
 };
 
 // Exercise: Writing good assertions
+/**
+ * Returns an array of coupons.
+ * 
+ * @returns {{
+ *  code: string;
+ *  discount: number;
+ * }[]} Array of coupons.
+ */
 export function getCoupons() {
   return [
     { code: 'SAVE20NOW', discount: 0.2 },

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { message, numbersArray, person } from '../src/core';
+import { message, numbersArray, person, getCoupons } from '../src/core';
 
 describe('Match Object', () => {
   it('should equals value', () => {
@@ -59,5 +59,36 @@ describe('Match objects', () => {
     expect(typeof result.firstName).toBe("string");
     expect(typeof result.lastName).toBe("string");
 
+  });
+});
+
+describe.only('getCoupons', () => {
+  it('should returns an array', () => {
+    const coupons = getCoupons();
+    expect(Array.isArray(coupons)).toBe(true);
+  });
+
+  it('should returns an array of coupons', () => {
+    const coupons = getCoupons();
+    expect(coupons.length).toBeGreaterThan(0);
+  });
+
+  it('should returns an array with valid coupon code', () => {
+    const coupons = getCoupons();
+    coupons.forEach((coupon) => {
+      expect(coupon).toHaveProperty("code");
+      expect(typeof coupon.code).toBe("string");
+      expect(coupon.code).toBeTruthy();
+    });
+  });
+
+  it('should returns an array with valid discount', () => {
+    const objects = getCoupons();
+    objects.forEach((coupon) => {
+      expect(coupon).toHaveProperty("discount");
+      expect(typeof coupon.discount).toBe("number");
+      expect(coupon.discount).toBeGreaterThan(0);
+      expect(coupon.discount).toBeLessThanOrEqual(0.5);
+    });
   });
 });
