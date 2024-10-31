@@ -88,6 +88,12 @@ export async function signUp(email) {
 }
 
 // Lesson: Spying on functions
+/**
+ * Send a login code to the user.
+ * 
+ * @param {string} email The user email.
+ * @returns {Promise<void>} A promise that resolves when the email is sent.
+ */
 export async function login(email) {
   const code = security.generateCode();
 
