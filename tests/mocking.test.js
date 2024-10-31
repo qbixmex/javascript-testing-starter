@@ -232,7 +232,7 @@ describe('mocking', () => {
     });
   });
 
-  describe.only('getDiscount', () => {
+  describe('getDiscount', () => {
     it('should return 0.2 if today is Christmas', () => {
       // Christmas day first minute.
       vi.setSystemTime('2024-12-25 00:01');
