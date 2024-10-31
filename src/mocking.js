@@ -70,12 +70,21 @@ export async function submitOrder(order, creditCard) {
 }
 
 // Lesson: Partial mocking
+/**
+ * Sign up a user with the given email.
+ * 
+ * @param {string} email The user email
+ * @returns {Promise<boolean>} True if the user signed up successfully otherwise false.
+ */
 export async function signUp(email) {
   if (!isValidEmail(email)) return false;
 
-  await sendEmail(email, 'Welcome aboard!');
-
-  return true;
+  try {
+    await sendEmail(email, 'Welcome aboard!');
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 // Lesson: Spying on functions

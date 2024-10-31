@@ -4,16 +4,26 @@ import {
   getShippingInfo,
   renderPage,
   submitOrder,
+  signUp,
 } from '../src/mocking';
 import { getExchangeRate } from '../src/libs/currency';
 import { getShippingQuote } from '../src/libs/shipping';
 import { trackPageView } from '../src/libs/analytics';
 import { charge } from '../src/libs/payment';
+import { sendEmail } from '../src/libs/email';
 
 vi.mock('../src/libs/currency');
 vi.mock('../src/libs/shipping');
 vi.mock('../src/libs/analytics');
 vi.mock('../src/libs/payment');
+
+vi.mock('../src/libs/email', async (importOriginalModule) => {
+  const originalModule = await importOriginalModule();
+  return {
+    ...originalModule,
+    sendEmail: vi.fn(),
+  };
+});
 
 describe('mocking', () => {
   it('mock returning value', () => {
@@ -127,7 +137,7 @@ describe('mocking', () => {
     });
   });
 
-  describe.only('submitOrder', () => {
+  describe('submitOrder', () => {
     const order = { totalAmount: 10 };
     const creditCard = { creditCardNumber: 1234 };
 
@@ -158,6 +168,31 @@ describe('mocking', () => {
         error: 'payment_error'
       });
     });
-  })
+  });
+
+  describe('signUp', () => {
+    const testEmail = 'user@domain.com';
+
+    it.skip('should return false if email is not valid', async () => {
+      const result = await signUp('john_gmail.com');
+      expect(result).toBe(false);
+    });
+
+    it('should return true if email is valid', async () => {
+      const result = await signUp(testEmail);
+      expect(result).toBe(true);
+    });
+
+    it('should send the welcome email if email is valid', async () => {
+      await signUp(testEmail);
+
+      expect(sendEmail).toHaveBeenCalled();
+
+      const args = vi.mocked(sendEmail).mock.calls[0];
+
+      expect(args[0]).toBe(testEmail);
+      expect(args[1]).toMatch(/welcome/i);
+    });
+  });
 
 });
