@@ -7,6 +7,7 @@ import {
   signUp,
   login,
   isOnline,
+  getDiscount,
 } from '../src/mocking';
 import { getExchangeRate } from '../src/libs/currency';
 import { getShippingQuote } from '../src/libs/shipping';
@@ -229,6 +230,28 @@ describe('mocking', () => {
       vi.setSystemTime('2024-01-01 19:59');
       expect(isOnline()).toBe(true);
     });
-  })
+  });
+
+  describe.only('getDiscount', () => {
+    it('should return 0.2 if today is Christmas', () => {
+      // Christmas day first minute.
+      vi.setSystemTime('2024-12-25 00:01');
+      expect(getDiscount()).toBe(0.2);
+
+      // Christmas day at the last minute.
+      vi.setSystemTime('2024-12-25 23:59');
+      expect(getDiscount()).toBe(0.2);
+    });
+
+    it('should return 0 on any other day', () => {
+      // The day before Christmas.
+      vi.setSystemTime('2024-12-24 00:01');
+      expect(getDiscount()).toBe(0);
+
+      // The day after Christmas.
+      vi.setSystemTime('2024-12-26 00:01');
+      expect(getDiscount()).toBe(0);
+    });
+  });
 
 });

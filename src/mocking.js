@@ -110,6 +110,11 @@ export function isOnline() {
 }
 
 // Exercise
+/**
+ * Get the discount rate.
+ * 
+ * @returns {number} The discount rate.
+ */
 export function getDiscount() {
   const today = new Date();
   const isChristmasDay = today.getMonth() === 11 && today.getDate() === 25;
