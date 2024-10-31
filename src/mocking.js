@@ -49,6 +49,17 @@ export async function renderPage() {
 }
 
 // Exercise
+/**
+ * Submit an order with the given payment information.
+ * 
+ * @param {{ totalAmount: number }} order The order to submit.
+ * @param {{ creditCardNumber: number }} creditCard The payment information.
+ * 
+ * @returns {Promise<{
+ *  success: boolean;
+ *  error?: string;
+ * }} Order submission result.
+ */
 export async function submitOrder(order, creditCard) {
   const paymentResult = await charge(creditCard, order.totalAmount);
 
