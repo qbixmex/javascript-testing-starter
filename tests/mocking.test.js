@@ -1,4 +1,4 @@
-import { vi, it, expect, describe } from 'vitest';
+import { vi, it, expect, describe, beforeEach } from 'vitest';
 import {
   getPriceInCurrency,
   getShippingInfo,
@@ -188,7 +188,7 @@ describe('mocking', () => {
     it('should send the welcome email if email is valid', async () => {
       await signUp(testEmail);
 
-      expect(sendEmail).toHaveBeenCalled();
+      expect(sendEmail).toHaveBeenCalledOnce();
 
       const args = vi.mocked(sendEmail).mock.calls[0];
 
@@ -199,6 +199,7 @@ describe('mocking', () => {
 
   describe('login', () => {
     const email = 'user@domain.com';
+
     it('should email the one-time login code ', async () => {
       const spy = vi.spyOn(security, 'generateCode');
 
@@ -207,6 +208,7 @@ describe('mocking', () => {
       const securityCode = spy.mock.results.at(0).value.toString();
 
       expect(sendEmail).toHaveBeenCalledWith(email, securityCode);
+      expect(sendEmail).toHaveBeenCalledOnce();
     });
   });
 
