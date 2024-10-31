@@ -14,7 +14,7 @@ export function message() {
  * @returns {number[]} Array of numbers.
  */
 export function numbersArray() {
-  return [ 3, 2, 4, 67, 7, 32 ];
+  return [3, 2, 4, 67, 7, 32];
 };
 
 /**
@@ -144,7 +144,7 @@ export function isPriceInRange(price, min, max) {
  * @returns {boolean} True if the username is valid otherwise false.
  */
 export function isValidUsername(username) {
-  if (!username) return false; 
+  if (!username) return false;
 
   const minLength = 5;
   const maxLength = 15;
@@ -191,12 +191,12 @@ export function fetchData() {
 
   return Promise.reject({ reason: 'Operation failed' });
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const data = [1, 2, 3];
-      resolve(data);
-    });
-  });
+  // return new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     const data = [1, 2, 3];
+  //     resolve(data);
+  //   });
+  // });
 }
 
 // Lesson: Setup and teardown

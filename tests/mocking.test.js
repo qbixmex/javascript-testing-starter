@@ -125,7 +125,7 @@ describe('mocking', () => {
 
       // Combined
       expect(result).toMatch(/shipping cost: \$10.75 \(2 days\)/i);
-    })
+    });
   });
 
   describe('renderPage', () => {

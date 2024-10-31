@@ -47,7 +47,7 @@ describe('Match arrays', () => {
 
     //? Better assertion but not the best
     // expect(result).toHaveLength(3);
-    
+
     //? Better assertion
     expect(result.length).toBeGreaterThan(0);
     expect(result).toEqual(expect.arrayContaining([2, 4, 7]));
@@ -240,8 +240,8 @@ describe('validateUserInput', () => {
         expect(error).toHaveProperty("reason");
         expect(error.reason).toMatch(/fail/i);
       }
-    })
-  })
+    });
+  });
 
   describe('stack', () => {
     let stack;
@@ -273,9 +273,9 @@ describe('validateUserInput', () => {
       stack.push(25);
       stack.push(12);
 
-      
+
       const pickedItem = stack.peek();
-      
+
       expect(stack.size()).toBe(2);
       expect(pickedItem).toBe(12);
     });
@@ -307,7 +307,7 @@ describe('validateUserInput', () => {
       stack.clear();
 
       expect(stack.size()).toBe(0);
-    })
-  })
+    });
+  });
 
 });
